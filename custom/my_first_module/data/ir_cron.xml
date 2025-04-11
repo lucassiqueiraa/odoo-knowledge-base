@@ -1,0 +1,34 @@
+<odoo>
+    <record id="cron_mark_old_cars_used" model="ir.cron">
+        <field name="name">Atualizar carros antigos para USADO</field>
+        <field name="model_id" ref="model_car_car"/>
+        <field name="state">code</field>
+        <field name="code">model.mark_old_cars_as_used()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+    </record>
+
+
+    <record id="cron_weekly_sold_cars_report" model="ir.cron">
+        <field name="name">Relatório Semanal de Carros Vendidos</field>
+        <field name="model_id" ref="model_car_car"/>
+        <field name="state">code</field>
+        <field name="code">model.send_weekly_sold_cars_report()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="nextcall" eval="(DateTime.now() + timedelta(days=5)).strftime('%Y-%m-%d 18:00:00')"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="cron_clean_driverless_cars" model="ir.cron">
+        <field name="name">Limpeza de Carros Abandonados</field>
+        <field name="model_id" ref="model_car_car"/>
+        <field name="state">code</field>
+        <field name="code">model.clean_driverless_cars()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+    </record>
+
+</odoo>

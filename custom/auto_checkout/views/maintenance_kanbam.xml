@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Herança correta da view Kanban de equipes de manutenção -->
+    <record id="maintenance_team_kanban_inherit" model="ir.ui.view">
+        <field name="name">maintenance.team.kanban.inherit.filter</field>
+        <field name="model">maintenance.team</field>
+        <field name="inherit_id" ref="maintenance.maintenance_team_kanban"/>
+        <field name="arch" type="xml">
+            <!-- Modifica o botão To Do principal -->
+            <xpath expr="//button[@name='445' and contains(@class, 'btn-primary')]" position="attributes">
+                <attribute name="context">{'search_default_filter_my_manutenances': 1, 'search_default_todo': 1}</attribute>
+            </xpath>
+
+            <!-- Modifica o botão To Do no menu dropdown - VERSÃO CORRIGIDA -->
+            <xpath expr="//a[contains(., 'To Do') and contains(@context, 'search_default_todo')]" position="attributes">
+                <attribute name="context">{'search_default_filter_my_manutenances': 1, 'search_default_todo': 1}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

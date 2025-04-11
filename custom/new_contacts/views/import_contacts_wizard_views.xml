@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_import_contacts_wizard" model="ir.actions.act_window">
+    <field name="name">Import Contacts</field>
+    <field name="res_model">import.contacts.wizard</field>
+    <field name="view_mode">form</field>  <!-- Mude de 'tree' para 'form' -->
+    <field name="target">new</field>
+    <field name="binding_model_id" ref="model_mailing_contact"/>
+</record>
+
+    <record id="view_import_contacts_wizard" model="ir.ui.view">
+        <field name="name">import.contacts.wizard.form</field>
+        <field name="model">import.contacts.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Contacts">
+                <group>
+                    <field name="number_of_contacts"/>
+                </group>
+                <footer>
+                    <button name="action_import_contacts" type="object" string="Import" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="wizard_action_window_new_contacts" model="ir.actions.act_window">
+        <field name="name">New Contacts Wizard</field>
+        <field name="res_model">mailing.contact</field>
+        <field name="binding_model_id" ref="model_mailing_contact"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

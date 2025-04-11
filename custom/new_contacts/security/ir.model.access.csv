@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+new_contacts.access_mailing_contact,access_mailing_contacts,new_contacts.model_mailing_contact,base.group_user,1,1,1,1
+new_contacts.access_account_move,access_account_move,new_contacts.model_account_move,base.group_user,1,1,1,1
+new_contacts.access_crm_lead,access_crm_lead,new_contacts.model_crm_lead,base.group_user,1,1,1,1
+new_contacts.access_sale_order,access_sale_order,new_contacts.model_sale_order,base.group_user,1,1,1,1
+
+new_contacts.access_import_contacts_wizard,access_import_contacts_wizard,new_contacts.model_import_contacts_wizard,base.group_user,1,0,1,0
+
+

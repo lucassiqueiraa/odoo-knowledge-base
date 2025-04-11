@@ -1,0 +1,16 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="ir_cron_generate_maintenance_events" model="ir.cron">
+            <field name="name">Gerar Manutenções Preventivas</field>
+            <field name="model_id" ref="model_maintenance_plan"/>
+            <field name="state">code</field>
+            <field name="code">model.generate_maintenance_events()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
+
+    </data>
+</odoo>

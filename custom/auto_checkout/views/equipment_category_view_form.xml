@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Herda a view de categoria de equipamento para adicionar o template -->
+    <record id="view_equipment_category_form_inherit" model="ir.ui.view">
+        <field name="name">maintenance.equipment.category.form.inherit.checklist</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Adiciona o campo no formulário de forma simples -->
+            <xpath expr="//field[@name='note']" position="before">
+                <field name="checklist_template_id"
+                       string="Template de Checklist"
+                       widget="many2one"
+                       options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
+<!--    <record id="view_maintenance_checklist_template_tree" model="ir.ui.view">-->
+<!--        <field name="name">maintenance.checklist.template.tree</field>-->
+<!--        <field name="model">maintenance.checklist.template</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="name"/>-->
+<!--                <field name="category_id"/>-->
+<!--                <field name="equipment_id"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->

@@ -1,0 +1,68 @@
+<!-- Arquivo: views/maintenance_dashboard_views.xml -->
+<odoo>
+    <record id="maintenance_equipment_history_view" model="ir.ui.view">
+        <field name="name">maintenance.equipment.history.view</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="arch" type="xml">
+            <form string="Histórico do Equipamento" create="false" edit="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="serial_no"/>
+                            <field name="category_id"/>
+                            <field name="model"/>
+                        </group>
+                        <group>
+                            <field name="maintenance_count"/>
+                            <field name="maintenance_hours" widget="float_time"/>
+                            <field name="maintenance_material_cost" widget="monetary"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Manutenções Realizadas">
+                            <field name="maintenance_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="maintenance_type"/>
+                                    <field name="request_date"/>
+                                    <field name="close_date"/>
+                                    <field name="user_id"/>
+                                    <field name="total_hours_spent" widget="float_time"/>
+                                    <button name="action_view_details" string="Ver Detalhes"
+                                            type="object" class="btn-sm btn-primary"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Gráficos e Análises">
+                            <!-- Aqui você pode adicionar gráficos usando o mecanismo de gráficos do Odoo -->
+                            <div>
+                                <!-- Placeholder para futuros gráficos -->
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_maintenance_equipment_history" model="ir.actions.act_window">
+        <field name="name">Histórico de Manutenções</field>
+        <field name="res_model">maintenance.equipment</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="maintenance_equipment_history_view"/>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Adicionar ao menu -->
+    <menuitem id="menu_maintenance_equipment_history"
+              name="Histórico de Equipamentos"
+              parent="maintenance.menu_maintenance_title"
+              action="action_maintenance_equipment_history"
+              sequence="5"/>
+</odoo>

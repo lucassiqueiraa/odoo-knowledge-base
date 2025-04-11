@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+my_first_module.access_car_car_user,Acess_User_Car,my_first_module.model_car_car,my_first_module.group_user,1,0,0,0
+my_first_module.access_car_car_manager,Acess_Manager_Car,my_first_module.model_car_car,my_first_module.group_manager,1,1,1,0
+my_first_module.access_car_car_super_manager,Acess Super Manager Car,my_first_module.model_car_car,my_first_module.group_super_manager,1,1,1,1
+
+my_first_module.access_project_project_user,Acess_user_project,project.model_project_project,my_first_module.group_user_project,1,1,0,0
+my_first_module.access_project_project_admin,Acess_admin_project,project.model_project_project,my_first_module.group_manager_project,1,1,1,1
+
+my_first_module.access_project_task_user,Acess_user_project_tasks,project.model_project_task,my_first_module.group_user_project,1,1,0,0
+
+
+my_first_module.access_parking_parking,access_parking_parking,my_first_module.model_parking_parking,base.group_user,1,1,1,1
+my_first_module.access_car_feature, access_car_feature,my_first_module.model_car_feature,base.group_user,1,1,1,1
+my_first_module.access_car_wizard,access_car_wizard,my_first_module.model_car_wizard,base.group_user,1,1,1,1

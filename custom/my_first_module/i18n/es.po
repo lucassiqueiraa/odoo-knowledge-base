@@ -1,0 +1,283 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* my_first_module
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-26 12:38+0000\n"
+"PO-Revision-Date: 2025-03-26 12:38+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: my_first_module
+#: model:mail.template,body_html:my_first_module.car_mail_template
+msgid ""
+"<div>\n"
+"                   <p> Hello Sir, <t t-out=\"object.driver_id.name or ''\">Marc Demo</t></p>\n"
+"                    <p> Congratulation for car </p>\n"
+"                    <p> Horse Power : <t t-out=\"object.horse_power or ''\">100</t></p>\n"
+"                    <p> Doors Number : <t t-out=\"object.door_number or ''\">5</t></p>\n"
+"                    Best Regards.\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.actions.act_window,name:my_first_module.car_wizard_action
+msgid "Add Horse Power For Actual Car"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model,name:my_first_module.model_car_car
+msgid "CAR"
+msgstr ""
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_change_horse_power_wizard_form
+msgid "Cancel"
+msgstr ""
+
+#. module: my_first_module
+#: model:mail.template,name:my_first_module.car_mail_template
+msgid "Car Email Template"
+msgstr ""
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_search_view
+msgid "Car Search"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__car_sequence
+msgid "Car Sequence"
+msgstr ""
+
+#. module: my_first_module
+#: model:mail.template,subject:my_first_module.car_mail_template
+msgid "Car Solded {{object.name}}"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.actions.act_window,name:my_first_module.wizard_action_window_car
+#: model:ir.model,name:my_first_module.model_car_wizard
+msgid "Car Wizard"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.actions.act_window,name:my_first_module.car_action
+#: model:ir.model.fields,field_description:my_first_module.field_parking_parking__car_ids
+#: model:ir.ui.menu,name:my_first_module.car_menu
+msgid "Cars"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_sale_order__client_purchase_code
+msgid "Client Purchase Code"
+msgstr ""
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.sale_order_inherit_view
+msgid "Client Purchase Code 2"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_sale_order__client_purchase_code2
+msgid "Client Purchase Code2"
+msgstr ""
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_change_horse_power_wizard_form
+msgid "Confirm"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model,name:my_first_module.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__create_uid
+#: model:ir.model.fields,field_description:my_first_module.field_car_feature__create_uid
+#: model:ir.model.fields,field_description:my_first_module.field_car_wizard__create_uid
+#: model:ir.model.fields,field_description:my_first_module.field_parking_parking__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__create_date
+#: model:ir.model.fields,field_description:my_first_module.field_car_feature__create_date
+#: model:ir.model.fields,field_description:my_first_module.field_car_wizard__create_date
+#: model:ir.model.fields,field_description:my_first_module.field_parking_parking__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__display_name
+#: model:ir.model.fields,field_description:my_first_module.field_car_feature__display_name
+#: model:ir.model.fields,field_description:my_first_module.field_car_wizard__display_name
+#: model:ir.model.fields,field_description:my_first_module.field_parking_parking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__door_number
+msgid "Doors Number"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__driver_id
+msgid "Driver"
+msgstr "Conductor"
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__feature_ids
+msgid "Features"
+msgstr ""
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_search_view
+msgid "Group By..."
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__horse_power
+#: model:ir.model.fields,field_description:my_first_module.field_car_wizard__horse_power_plus
+msgid "Horse Power"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__id
+#: model:ir.model.fields,field_description:my_first_module.field_car_feature__id
+#: model:ir.model.fields,field_description:my_first_module.field_car_wizard__id
+#: model:ir.model.fields,field_description:my_first_module.field_parking_parking__id
+msgid "ID"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car____last_update
+#: model:ir.model.fields,field_description:my_first_module.field_car_feature____last_update
+#: model:ir.model.fields,field_description:my_first_module.field_car_wizard____last_update
+#: model:ir.model.fields,field_description:my_first_module.field_parking_parking____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__write_uid
+#: model:ir.model.fields,field_description:my_first_module.field_car_feature__write_uid
+#: model:ir.model.fields,field_description:my_first_module.field_car_wizard__write_uid
+#: model:ir.model.fields,field_description:my_first_module.field_parking_parking__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__write_date
+#: model:ir.model.fields,field_description:my_first_module.field_car_feature__write_date
+#: model:ir.model.fields,field_description:my_first_module.field_car_wizard__write_date
+#: model:ir.model.fields,field_description:my_first_module.field_parking_parking__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__message
+#: model:ir.model.fields,field_description:my_first_module.field_res_partner__message
+#: model:ir.model.fields,field_description:my_first_module.field_res_users__message
+msgid "Message"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_res_partner__message_2
+#: model:ir.model.fields,field_description:my_first_module.field_res_users__message_2
+msgid "Message 2"
+msgstr ""
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_search_view
+msgid "Meu filtro, porta == 2"
+msgstr ""
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_search_view
+msgid "Meu filtro2, porta >= 2"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__name
+#: model:ir.model.fields,field_description:my_first_module.field_car_feature__name
+#: model:ir.model.fields,field_description:my_first_module.field_parking_parking__name
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_search_view
+msgid "Name"
+msgstr "Nombre"
+
+#. module: my_first_module
+#: model:ir.model.fields.selection,name:my_first_module.selection__car_car__status__new
+msgid "New"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_res_partner__other_information
+#: model:ir.model.fields,field_description:my_first_module.field_res_users__other_information
+msgid "Other Information"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.actions.act_window,name:my_first_module.parking_action
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__parking_id
+#: model:ir.ui.menu,name:my_first_module.parking_menu
+msgid "Parking"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model,name:my_first_module.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_form
+msgid "Set Car Sold"
+msgstr ""
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_form
+msgid "Set Car Used"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields.selection,name:my_first_module.selection__car_car__status__sold
+msgid "Sold"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__status
+msgid "Status"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields,field_description:my_first_module.field_car_car__total_speed
+msgid "Total Speed"
+msgstr ""
+
+#. module: my_first_module
+#: model_terms:ir.ui.view,arch_db:my_first_module.car_form
+msgid "Update Horse Power"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model.fields.selection,name:my_first_module.selection__car_car__status__used
+msgid "Used"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model,name:my_first_module.model_car_feature
+msgid "car.feature"
+msgstr ""
+
+#. module: my_first_module
+#: model:ir.model,name:my_first_module.model_parking_parking
+msgid "parking.parking"
+msgstr ""

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+     <record id="car_search_view" model="ir.ui.view">
+        <field name="name">Cars Search</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+                <search string="Car Search">
+                    <!-- Group -->
+                    <group expand="1" string="Group By...">
+                        <filter name="filter_3" string="Name" domain="[]" context="{'group_by':'name'}"/>
+
+                    </group>
+
+                    <!-- Meus filtros -->
+                    <filter string="Meu filtro, porta == 2" name="filter_1" domain="[('door_number','=',2)]"/>
+                    <filter string="Meu filtro2, porta >= 2" name="filter_2" domain="[('door_number','&gt;=',2)]"/>
+                </search>
+        </field>
+
+     </record>
+
+    <!-- Form View Car -->
+    <record id="car_form" model="ir.ui.view">
+        <field name="name">Cars</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                        <button name="%(my_first_module.car_wizard_action)d" type="action" string="Update Horse Power"/>
+
+                        <button name="set_car_to_used" string="Set Car Used" type="object" class="oe_highlight"
+                                attrs="{'invisible':[('status','!=','new')]}"/>
+                        <button name="set_car_to_sold" string="Set Car Sold" type="object" class="oe_highlight"
+                                attrs="{'invisible':[('status','!=','used')]}"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="car_sequence" readonly="1"/>
+                            <field name="name" required="1"/>
+                            <field name="horse_power"
+                                   attrs="{'readonly':[('door_number','=', 4)], 'required':[('name','=','abc')]}"/>
+                            <field name="door_number"/>
+                            <field name="driver_id"/>
+                            <field name="parking_id"/>
+                            <field name="feature_ids" widget="many2many_tags"/>
+                            <field name="total_speed"/>
+                            <field name="message"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+
+    </record>
+
+    <!-- Tree View Car -->
+    <record id="car_tree" model="ir.ui.view">
+        <field name="name">Cars</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="horse_power"/>
+                <field name="door_number"/>
+                <field name="driver_id"/>
+                <field name="parking_id"/>
+                <field name="feature_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+
+    </record>
+
+    <!-- Action for Car -->
+    <record id="car_action" model="ir.actions.act_window">
+        <field name="name">Cars</field>
+        <field name="res_model">car.car</field>
+        <field name="view_mode">tree,form</field>
+        <!-- Define o filtro abaixo com default -->
+        <field name="context">{"search_default_filter_1":1, "search_default_filter_3":1}</field>
+    </record>
+
+    <!-- Menu Car -->
+
+    <menuitem id="car_menu" name="Cars" sequence="200" action="car_action"/>
+
+</odoo>

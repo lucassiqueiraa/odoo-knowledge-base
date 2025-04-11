@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record model="ir.rule" id="car_rule">
+        <field name="name">Rule For Car</field>
+        <field name="model_id" ref="model_car_car"/>
+        <!--<field name="global" eval="True"/>-->
+        <field name="groups" eval="[(4, ref('my_first_module.group_user'))]"/>
+        <field name="domain_force">['|', ('horse_power', '>', 4), (
+            'horse_power', '&lt;', 2)]</field> <!-- Pode fazer tudo que tem abaixo se horse_power for maior que 4 -->
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!--    Ver os projetos de que é follower -->
+    <record model="ir.rule" id="rule_view_followed_projects">
+        <field name="name">Rule For Project</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="groups" eval="[(4, ref('my_first_module.group_user_project'))]"/>
+
+        <field name="domain_force">[('message_partner_ids', 'in', [user.partner_id.id])]</field>
+        <field name="perm_read" eval="1"/>
+        <!--        <field name="perm_write" eval="1"/>-->
+        <!--        <field name="perm_create" eval="1"/>-->
+        <!--        <field name="perm_unlink" eval="1"/>-->
+    </record>
+
+
+    <!--    Editar os projetos de que é gestor-->
+    <record model="ir.rule" id="rule_edit_managed_projects">
+        <field name="name">Edit Managed Projects</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <!--        <field name="global" eval="True"/>-->
+        <field name="groups" eval="[(4, ref('my_first_module.group_user_project'))]"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record model="ir.rule" id="rule_view_followed_project_task">
+        <field name="name">Rule view for tasks</field>
+        <field name="model_id" ref="project.model_project_task"/>
+        <field name="groups" eval="[(4, ref('my_first_module.group_user_project'))]"/>
+
+        <!-- Permite ler se for seguidor da tarefa ou do projeto que a tarefa pertence -->
+        <field name="domain_force">
+            ['|',
+             ('message_partner_ids', 'in', [user.partner_id.id]),
+             ('project_id.message_partner_ids', 'in', [user.partner_id.id])
+             ]
+        </field>
+        <field name="perm_read" eval="1"/>
+    </record>
+
+    <!--    Editar tarefas atribuídas a si OU de que pertencem a projetos de que é gestor -->
+    <record model="ir.rule" id="rule_edit_assigned_or_manager_tasks">
+        <field name="name">Rule: Edit assigned tasks or project manager's tasks</field>
+        <field name="model_id" ref="project.model_project_task"/>
+        <field name="groups" eval="[(4, ref('my_first_module.group_user_project'))]"/>
+
+        <field name="domain_force">
+            ['|',
+             ('user_ids', 'in', [user.id]),
+             ('project_id.user_id', '=', user.id)
+             ]
+        </field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>  <!-- Opcional -->
+    </record>
+
+</odoo>

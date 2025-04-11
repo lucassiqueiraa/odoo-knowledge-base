@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View para Maintenance Timesheet -->
+    <record id="view_maintenance_timesheet_form" model="ir.ui.view">
+        <field name="name">maintenance.timesheet.form</field>
+        <field name="model">maintenance.timesheet</field>
+        <field name="arch" type="xml">
+            <form string="Registro de Horas">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="maintenance_id" readonly="context.get('default_maintenance_id')"/>
+                            <field name="employee_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="hours" widget="float_time"/>
+                            <field name="user_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descrição">
+                            <field name="description" placeholder="Detalhe o trabalho realizado..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View para Maintenance Timesheet -->
+    <record id="view_maintenance_timesheet_tree" model="ir.ui.view">
+        <field name="name">maintenance.timesheet.tree</field>
+        <field name="model">maintenance.timesheet</field>
+        <field name="arch" type="xml">
+            <tree string="Registros de Horas" editable="bottom">
+                <field name="maintenance_id" optional="hide" readonly="context.get('default_maintenance_id')"/>
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="hours" widget="float_time" sum="Total"/>
+                <field name="description"/>
+                <field name="user_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Modificação na view form de Maintenance Request -->
+    <record id="hr_equipment_request_view_form_timesheet" model="ir.ui.view">
+        <field name="name">maintenance.request.form.timesheet</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Horas Trabalhadas" name="timesheets">
+                    <label for="total_hours_spent" attrs="{'invisible': [('total_hours_spent', '=', 0)]}"/>
+                    <field name="total_hours_spent" widget="float_time" class="oe_inline"
+                           attrs="{'invisible': [('total_hours_spent', '=', 0)]}" readonly="1"/>
+
+                    <field name="timesheet_ids" context="{'default_maintenance_id': active_id}">
+                        <tree editable="bottom">
+                            <field name="employee_id"/>
+                            <field name="date"/>
+                            <field name="hours" widget="float_time" sum="Total Horas"/>
+                            <field name="description"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action para Maintenance Timesheet -->
+    <record id="action_maintenance_timesheet" model="ir.actions.act_window">
+        <field name="name">Registro de Horas</field>
+        <field name="res_model">maintenance.timesheet</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Registre horas trabalhadas em manutenções
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu para Maintenance Timesheet -->
+    <menuitem id="menu_maintenance_timesheet"
+        name="Registro de Horas"
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_maintenance_timesheet"
+        sequence="20"/>
+</odoo>

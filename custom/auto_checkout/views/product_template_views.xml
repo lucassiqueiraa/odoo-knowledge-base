@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- HERANÇA DO TEMPLATE DO PRODUTO -->
+    <record id="view_product_template_inherit_customers" model="ir.ui.view">
+        <field name="name">product.template.inherit.customers</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Aba de Clientes Habituais -->
+            <xpath expr="//page[@name='sales']" position="after">
+                <page string="Clientes Habituais">
+                    <field name="customer_reference_ids">
+                        <tree editable="bottom">
+                            <field name="partner_id"/>
+                            <field name="custom_ref"/>
+                            <field name="custom_name"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+            <!-- Campo de Países -->
+            <xpath expr="//page[@name='general_information']" position="inside">
+                <group string="Localização">
+                    <field name="all_variant_country_ids" widget="many2many_tags"/>
+                </group>
+
+            </xpath>
+        </field>
+    </record>
+
+    <!-- HERANÇA DA VARIANTE DO PRODUTO -->
+    <record id="view_product_product_inherit_countries" model="ir.ui.view">
+        <field name="name">product.product.inherit.countries</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='inventory']" position="after">
+                <page string="Localização">
+                    <group>
+                        <!-- Está invisível pois é uma lista auxiliar, poderia simplesmente remover também-->
+                        <field name="variant_country_ids" widget="many2many_tags" attrs="{'invisible': 1}"/>
+                        <field name="country_ids" widget="many2many_tags"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

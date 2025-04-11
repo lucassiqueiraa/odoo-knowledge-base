@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menu principal do módulo que já abre a listagem -->
+    <menuitem id="menu_main_contact_importer"
+              name="Contact Importer"
+              action="action_mailing_contacts"
+              sequence="10"/>
+</odoo>

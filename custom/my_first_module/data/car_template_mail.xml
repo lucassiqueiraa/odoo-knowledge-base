@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="car_mail_template" model="mail.template">
+            <field name="name">Car Email Template</field>
+            <field name="email_from">{{user.email}}</field>
+            <field name="subject">Car Solded {{object.name}}</field>
+            <field name="lang">{{user.lang}}</field>
+            <field name="model_id" ref="model_car_car"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+                <div>
+                   <p> Hello Sir, <t t-out="object.driver_id.name or ''">Marc Demo</t></p>
+                    <p> Congratulation for car </p>
+                    <p> Horse Power : <t t-out="object.horse_power or ''">100</t></p>
+                    <p> Doors Number : <t t-out="object.door_number or ''">5</t></p>
+                    Best Regards.
+                </div>
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_maintenance_plan_tree" model="ir.ui.view">
+        <field name="name">maintenance.plan.tree</field>
+        <field name="model">maintenance.plan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="equipment_id"/>
+                <field name="technician_id"/>
+                <field name="frequency_days"/>
+                <field name="next_maintenance_date"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_maintenance_plan_form" model="ir.ui.view">
+        <field name="name">maintenance.plan.form</field>
+        <field name="model">maintenance.plan</field>
+        <field name="arch" type="xml">
+            <form string="Plano de Manutenção">
+                <group>
+                    <field name="name"/>
+                    <field name="equipment_id"/>
+                    <field name="technician_id"/>
+                    <field name="frequency_days"/>
+                    <field name="next_maintenance_date"/>
+                    <field name="active"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_maintenance_plan" model="ir.actions.act_window">
+        <field name="name">Planos de Manutenção</field>
+        <field name="res_model">maintenance.plan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_maintenance_plan_root" name="Planos de Manutenção"
+              parent="maintenance.menu_m_request"
+              action="action_maintenance_plan"/>
+</odoo>

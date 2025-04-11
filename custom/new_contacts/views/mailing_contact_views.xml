@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="mailing_contact_tree_view_button" model="ir.ui.view">
+        <field name="name">mailing.contact.tree.view.button</field>
+        <field name="model">mailing.contact</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_tree"/>
+        <field name="priority" eval="20"/> <!-- Prioridade maior para garantir sobreposição -->
+        <field name="arch" type="xml">
+            <!-- Adiciona o botão ao lado do existente -->
+            <xpath expr="//tree//header" position="inside">
+
+                <button name="%(new_contacts.action_import_contacts_wizard)d"
+                        type="action"
+                        string="Import Contacts"
+                        class="oe_highlight"
+                        groups="base.group_user"
+                />
+
+
+            </xpath>
+
+            <xpath expr="//tree/header/button[@name='action_add_to_mailing_list']" position="after">
+                <button name="delete_all_list_contacts" string="Delete All Contacts" type="object"
+                        class="oe_highlight btn-danger"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="mailing_contact_form_view_button" model="ir.ui.view">
+        <field name="name">mailing.contact.form.view.button</field>
+        <field name="model">mailing.contact</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_form"/>
+        <field name="priority" eval="20"/> <!-- Prioridade maior para garantir sobreposição -->
+        <field name="arch" type="xml">
+            <!-- Adiciona o botão ao lado do existente -->
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="%(new_contacts.action_import_contacts_wizard)d"
+                            type="action"
+                            string="Import Contacts"
+                            class="oe_highlight btn-primary"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_mailing_contacts" model="ir.actions.act_window">
+        <field name="name">Contacts</field>
+        <field name="res_model">mailing.contact</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree View para listar os contatos importados -->
+    <record id="view_mailing_contact_tree" model="ir.ui.view">
+        <field name="name">mailing.contact.tree</field>
+        <field name="model">mailing.contact</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="country_id"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>
