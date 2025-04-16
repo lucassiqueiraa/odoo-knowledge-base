@@ -6,6 +6,12 @@ class MaintenanceChecklistTemplate(models.Model):
     _description = 'Modelo de Checklist para Manutenção'
 
     name = fields.Char(required=True, string="Nome do Template")
+
+    # type = fields.Selection([
+    #     ('preventive', 'Manutenção Preventiva'),
+    #     ('hygiene', 'Higienização')
+    # ], string='Tipo de Checklist', required=True, default='preventive')
+
     category_ids = fields.One2many(
         'maintenance.equipment.category',
         'checklist_template_id',
@@ -19,15 +25,11 @@ class MaintenanceChecklistTemplate(models.Model):
         string='Equipamentos Associados'
     )
 
-
-
     line_ids = fields.One2many(
         'maintenance.checklist.item',
         'template_id',
         string='Itens da Checklist'
     )
-
-
 
 
 class MaintenanceChecklistItem(models.Model):
@@ -37,11 +39,13 @@ class MaintenanceChecklistItem(models.Model):
     name = fields.Char(string='Nome do Item', required=True)
     template_id = fields.Many2one('maintenance.checklist.template', required=True)
 
+
 # Essa classe tem haver com maintenance request para receber oque vem dos templates de checklist
 class MaintenanceChecklistExecution(models.Model):
     _name = 'maintenance.checklist.execution'
     _description = 'Checklist de Execução de Manutenção'
 
-    maintenance_request_id = fields.Many2one('maintenance.request', string='Requisição de Manutenção', required=True, ondelete='cascade')
+    maintenance_request_id = fields.Many2one('maintenance.request', string='Requisição de Manutenção', required=True,
+                                             ondelete='cascade')
     item_description = fields.Char('Item')
     is_done = fields.Boolean('Feito')

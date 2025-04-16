@@ -8,6 +8,9 @@ _logger = logging.getLogger(__name__)
 class MaintenanceRequest(models.Model):
     _inherit = 'maintenance.request'
 
+    # Campo relacionado, busca o modelo do equipamento selecionado
+    equipment_model = fields.Char(string="Modelo do equipamento", related='equipment_id.model', store=True)
+
     timesheet_ids = fields.One2many(
         'maintenance.timesheet',
         'maintenance_id',
@@ -27,10 +30,41 @@ class MaintenanceRequest(models.Model):
         copy=False
     )
 
+    checklist_hygiene_execution_ids = fields.One2many(
+        'maintenance.hygiene.execution',
+        'maintenance_request_id',
+        string='Checklist',
+        copy=False,
+    )
+
+    can_edit_prevention_checklist = fields.Boolean(
+        string='Pode Editar Checklist de Prevenção',
+        compute='_compute_can_edit_prevention_checklist',
+    )
+
+    # Campo computado para controlar a edição
+    can_edit_hygiene_checklist = fields.Boolean(
+        string='Pode Editar Checklist de Higiene',
+        compute='_compute_can_edit_hygiene_checklist',
+        store=False  # Não armazenar, pois depende do estágio atual
+    )
+
+    @api.depends('stage_id')
+    def _compute_can_edit_hygiene_checklist(self):
+        for record in self:
+            # Substitua pelo ID ou código correto do estágio "In Progress"
+            in_progress_stage = self.env.ref('maintenance.stage_1')
+            record.can_edit_hygiene_checklist = record.stage_id.id == in_progress_stage.id
+
+    @api.depends('stage_id')
+    def _compute_can_edit_prevention_checklist(self):
+        for record in self:
+            repaired_stage = self.env.ref('maintenance.stage_3')
+            record.can_edit_prevention_checklist = record.stage_id.id == repaired_stage.id
+
     material_line_ids = fields.One2many('maintenance.material.line', 'maintenance_id', string='Materiais Usados')
     consumo_realizado = fields.Boolean(string="Consumo Lançado", default=False)
 
-    # Adicione este método ao modelo MaintenanceRequest
     def action_view_details(self):
         self.ensure_one()
         return {
@@ -42,27 +76,50 @@ class MaintenanceRequest(models.Model):
             'target'   : 'current',
         }
 
-    # TODO: TENTAR ENCONTRAR UMA OUTRA FORMA DE PREENCHER A LISTA DE CHECKLIST AO CARREGAR A PAGINA SLA
     @api.onchange('equipment_id')
     def onchange_equipment_id(self):
-        # Limpa checklists e materiais existentes
-        self.checklist_execution_ids = [(5, 0, 0)]
-        self.material_line_ids = [(5, 0, 0)]
+        """Atualiza checklists e materiais quando o equipamento muda"""
+        self._clear_checklists_and_materials()
 
-        if not self.equipment_id:
-            return
+        # Obtém os templates
+        checklist_templates = self._get_checklist_templates()
+        material_templates = self._get_material_templates()
 
-        # PUXA CHECKLIST (como antes)
-        checklist_templates = []
+        # Processa checklists e materiais
+        self._process_preventive_checklists(checklist_templates)
+        self._process_materials(material_templates)
+        self._process_hygiene_checklists(material_templates)
 
+    def _clear_checklists_and_materials(self):
+        """Limpa todos os checklists e materiais"""
+        self.write({
+            'checklist_execution_ids'        : [(5, 0, 0)],
+            'material_line_ids'              : [(5, 0, 0)],
+            'checklist_hygiene_execution_ids': [(5, 0, 0)]
+        })
+
+    def _get_checklist_templates(self):
+        """Obtém templates de checklist do equipamento e categoria"""
+        templates = []
         if self.equipment_id.category_id.checklist_template_id:
-            checklist_templates.append(self.equipment_id.category_id.checklist_template_id)
+            templates.append(self.equipment_id.category_id.checklist_template_id)
         if self.equipment_id.checklist_template_ids:
-            checklist_templates.append(self.equipment_id.checklist_template_ids)
+            templates.extend(self.equipment_id.checklist_template_ids)
+        return templates
 
-        # CHECKLIST
+    def _get_material_templates(self):
+        """Obtém templates de materiais do equipamento e categoria"""
+        templates = []
+        if self.equipment_id.category_id.material_template_id:
+            templates.append(self.equipment_id.category_id.material_template_id)
+        if self.equipment_id.material_template_ids:
+            templates.extend(self.equipment_id.material_template_ids)
+        return templates
+
+    def _process_preventive_checklists(self, templates):
+        """Processa checklists preventivos"""
         checklist_vals = []
-        for template in checklist_templates:
+        for template in templates:
             for item in template.line_ids:
                 checklist_vals.append((0, 0, {
                     'item_description': item.name,
@@ -70,23 +127,28 @@ class MaintenanceRequest(models.Model):
                 }))
         self.checklist_execution_ids = checklist_vals
 
-        # PUXA TEMPLATE DE MATERIAIS
-        material_templates = []
-
-        if self.equipment_id.category_id.material_template_id:
-            material_templates.append(self.equipment_id.category_id.material_template_id)
-        if self.equipment_id.material_template_ids:
-            material_templates.append(self.equipment_id.material_template_ids)
-
-        # MATERIAIS
+    def _process_materials(self, templates):
+        """Processa materiais"""
         material_vals = []
-        for template in material_templates:
+        for template in templates:
             for line in template.line_ids:
                 material_vals.append((0, 0, {
                     'product_id': line.product_id.id,
                     'quantity'  : line.quantity
                 }))
         self.material_line_ids = material_vals
+
+    def _process_hygiene_checklists(self, templates):
+        """Processa checklists de higienização"""
+        hygiene_vals = []
+        for template in templates:
+            for line in template.hygiene_checklist_ids:
+                hygiene_vals.append((0, 0, {
+                    'item_description': line.name,
+                    'notes'           : line.notes,
+                    'is_done': False,
+                }))
+        self.checklist_hygiene_execution_ids = hygiene_vals
 
     def write(self, vals):
         result = super(MaintenanceRequest, self).write(vals)

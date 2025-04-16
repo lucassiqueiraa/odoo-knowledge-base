@@ -23,7 +23,7 @@ class MaintenancePlan(models.Model):
 
         for plan in plans:
             date = plan.next_maintenance_date
-
+            last_date = date  # Variável para armazenar a última data processada
 
             while date <= projection_limit:
                 start_dt = datetime.combine(date, datetime.min.time()).replace(hour=9)
@@ -55,7 +55,6 @@ class MaintenancePlan(models.Model):
                         ('maintenance_type', '=', 'preventive')
                     ], limit=1)
 
-                    print(plan.technician_id.name)
                     if not existing_request:
                         self.env['maintenance.request'].create({
                             'name'            : f"Manutenção Preventiva - {plan.equipment_id.name}",
@@ -65,11 +64,11 @@ class MaintenancePlan(models.Model):
                             'maintenance_type': 'preventive',
                         })
 
-
-
-                        # Atualiza próxima data de manutenção
-                        plan.next_maintenance_date = date + timedelta(days=plan.frequency_days)
-
+                last_date = date  # Atualiza a última data processada
                 # Avança para próxima data
                 date += timedelta(days=plan.frequency_days)
+
+            # Atualiza próxima data de manutenção FORA do loop principal
+            if today >= plan.next_maintenance_date:
+                plan.next_maintenance_date = last_date + timedelta(days=plan.frequency_days)
 

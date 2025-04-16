@@ -11,8 +11,10 @@
     </option>
   </component>
   <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/enterprise/addons" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/odoo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/odoo-knowledge-base" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/odoo-stubs" vcs="Git" />
   </component>
 </project>

@@ -33,7 +33,8 @@ new_contacts
         'views/maintenance_material_template.xml',
         'views/maintenance_dashboard_views.xml',
         'views/maintenance_equipment_form.xml',
-        'views/maintenance_dashboard_wizard_view.xml',
+        'views/maintenance_dashboard_wizard_views.xml',
+        'views/maintenance_request_stage_done.xml',
         'data/maintenance_plan_cron.xml',
         'data/cron.xml',
 

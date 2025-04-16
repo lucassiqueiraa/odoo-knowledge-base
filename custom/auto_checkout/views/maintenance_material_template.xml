@@ -10,13 +10,28 @@
                         <field name="equipment_ids" widget="many2many_tags" options="{'no_create': True}"/>
                         <field name="category_ids" widget="many2many_tags" options="{'no_create': True}"/>
                     </group>
-                    <separator string="Materiais do Template"/>
-                    <field name="line_ids">
-                        <tree editable="bottom">
-                            <field name="product_id"/>
-                            <field name="quantity"/>
-                        </tree>
-                    </field>
+                    <!--<separator string="Materiais do Template"/>-->
+
+                    <notebook>
+                        <page string="Materiais Usados">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Checklists de Higienização">
+                            <field name="hygiene_checklist_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="notes"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
                 </sheet>
             </form>
         </field>
@@ -35,14 +50,14 @@
 
     <!-- Action que abre a tela -->
     <record id="action_maintenance_material_template" model="ir.actions.act_window">
-        <field name="name">Templates de Materiais</field>
+        <field name="name">Templates de Materiais e Limpeza</field>
         <field name="res_model">maintenance.material.template</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <!-- Menu que chama a action -->
     <menuitem id="menu_maintenance_material_template_root"
-              name="Templates de Materiais"
+              name="Modelos Materiais/Limpeza"
               parent="maintenance.menu_m_request"
               action="action_maintenance_material_template"
               sequence="50"/>

@@ -48,7 +48,7 @@
 
     <!-- Menu -->
     <menuitem id="menu_maintenance_checklist_templates"
-              name="Modelos de Checklist"
+              name="Modelos de Manutenção Preventiva"
               parent="maintenance.menu_m_request"
               action="action_maintenance_checklist_templates"/>
 </odoo>

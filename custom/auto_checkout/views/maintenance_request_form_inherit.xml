@@ -4,14 +4,19 @@
         <field name="model">maintenance.request</field>
         <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='equipment_id']" position="after">
+                <field name="equipment_model"/>
+            </xpath>
             <xpath expr="//sheet" position="inside">
+                <field name="can_edit_hygiene_checklist" invisible="1"/>
+                <field name="can_edit_prevention_checklist" invisible="1"/>
                 <notebook>
                     <!-- Aba do checklist -->
-                    <page string="Checklist de Execução">
+                    <page string="Checklist de Prevenção">
                         <field name="checklist_execution_ids">
                             <tree editable="bottom">
                                 <field name="item_description"/>
-                                <field name="is_done"/>
+                                <field name="is_done" attrs="{'readonly': [('parent.can_edit_prevention_checklist', '=', False)]}"/>
                             </tree>
                         </field>
                     </page>
@@ -27,14 +32,28 @@
                             </field>
                             <field name="consumo_realizado" invisible="1"/>
                             <button name="action_lancar_consumo"
-                                string="Lançar Consumo"
-                                type="object"
-                                class="btn-primary"
-                                attrs="{'invisible': [('consumo_realizado', '=', True)]}"/>
+                                    string="Lançar Consumo"
+                                    type="object"
+                                    class="btn-primary"
+                                    attrs="{'invisible': [('consumo_realizado', '=', True)]}"/>
                         </group>
                     </page>
+                    <page string="Checklist de Higienização">
+                        <field name="checklist_hygiene_execution_ids">
+                            <tree editable="bottom">
+                                <field name="item_description" force_save="1"
+                                       attrs="{'readonly': [('parent.can_edit_hygiene_checklist', '=', False)]}"/>
+                                <field name="is_done"
+                                       attrs="{'readonly': [('parent.can_edit_hygiene_checklist', '=', False)]}"/>
+                                <field name="notes" force_save="1"
+                                       attrs="{'readonly': [('parent.can_edit_hygiene_checklist', '=', False)]}"/>
+                            </tree>
+                        </field>
+                    </page>
+
                 </notebook>
             </xpath>
         </field>
     </record>
+
 </odoo>

@@ -39,12 +39,12 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Gráficos e Análises">
-                            <!-- Aqui você pode adicionar gráficos usando o mecanismo de gráficos do Odoo -->
-                            <div>
-                                <!-- Placeholder para futuros gráficos -->
-                            </div>
-                        </page>
+<!--                        <page string="Gráficos e Análises">-->
+<!--                            &lt;!&ndash; Aqui você pode adicionar gráficos usando o mecanismo de gráficos do Odoo &ndash;&gt;-->
+<!--                            <div>-->
+<!--                                &lt;!&ndash; Placeholder para futuros gráficos &ndash;&gt;-->
+<!--                            </div>-->
+<!--                        </page>-->
                     </notebook>
                 </sheet>
             </form>
