@@ -1,0 +1,1 @@
+- Exercícios base de odoo
